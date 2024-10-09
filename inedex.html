@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>승리의 여신 니케 공략 정보 from GMR archive</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; }
+        h1, h2 { color: #333; }
+        input, button, select { margin: 10px 0; padding: 5px; }
+        #characterInfo { margin-top: 20px; display: flex; align-items: flex-start; }
+        .character-image { width: 30%; height: auto; margin-bottom: 20px; }
+        .character-details { flex: 1; }
+        .tip { cursor: pointer; color: blue; text-decoration: underline; }
+        .description { background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <img src="images/banner.png" alt="GMR 니케 공략" style="width:100%;">
+    <h1>승리의 여신 니케 공략 정보 from GMR archive</h1>
+    
+    <div class="description">
+<p>승리의 여신: 니케의 캐릭터별 육성 방법과 플레이하는 데 도움을 받을 수 있는 여러 꿀팁을 모아둔 웹페이지입니다. 문과생이 만들어 많이 조잡한 점 양해 부탁드립니다.  <p>*상세 공략의 경우 관련 니케의 포스팅이 없을 시 블로그 메인 링크로 대체됩니다.* 
+<ul><li>사용법1) 캐릭터 육성 방법에 본인이 원하는 니케의 이름을 검색(혹은 목록 선택) 해주세요.
+<li>사용법2) 원하는 꿀팁 공략을 클릭하시면 관련 블로그 포스팅으로 이동합니다.
+<li>아직 모든 니케의 정보를 업로드하지 못했습니다.빠르게 업데이트 할 예정이며, 원하는 니케의 공략이 필요하신 분은 수정/추가 요청 부탁드립니다.
+<li>수정/건의 요청 : GMR의 아카이브 <a href="https://blog.naver.com/gmr_archive" class="tip">문의하기</a>
+</p>
+
+    </div>
+
+    <h2>1. 캐릭터 육성 방법</h2>
+    <input type="text" id="characterName" placeholder="캐릭터 이름 입력">
+    <select id="characterSelect">
+        <option value="">캐릭터 선택</option>
+    </select>
+    <button onclick="searchCharacter()">검색</button>
+    <div id="characterInfo"></div>
+
+    <h2>2. 승리의 여신 니케 꿀팁 모음</h2>
+    <ul>
+
+        <li><a href="https://blog.naver.com/gmr_archive/223568276648" class="tip">9월 최신 쿠폰 교환 코드</a></li>
+        <li><a href="https://blog.naver.com/gmr_archive" class="tip">리뉴얼 및 업데이트 예정</a></li>
+
+    </ul>
+
+    <script>
+        const characters = {
+            "앨리스:원더랜드 바니": {
+                스킬트리: "4-4-4/7-7-4/10-7-4",
+                오버로드장비: "장탄",
+                하모니큐브: "택티컬 베어 큐브/렐릭 베어 큐브",
+                티어: "S",
+                공략링크: "https://blog.naver.com/gmr_archive",
+                이미지: ""
+            },
+                "자칼": {
+                    스킬트리: "1-1-1/4-4-4/자유-자유-자유",
+                    오버로드장비: "공증/우코/장탄",
+                    하모니큐브: "렐릭 퀀텀 큐브/렐릭 비고르 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                }, 
+       
+                "D.킬러 와이프": {
+                    스킬트리: "4-7-4/7-7-4/10-10-10",
+                    오버로드장비: "장탄",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "도로시": {
+                    스킬트리: "4-4-4/7-4-7/10-7-10",
+                    오버로드장비: "공증/우코",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "볼륨": {
+                    스킬트리: "4-4-4",
+                    오버로드장비: "풀강",
+                    하모니큐브: "렐릭 어썰트 큐브/렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "노이즈": {
+                    스킬트리: "1-1-1/4-4-4",
+                    오버로드장비: "차속4",
+                    하모니큐브: "렐릭 힐링 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "리타": {
+                    스킬트리: "4-4-4/7-4-7/10-4-10",
+                    오버로드장비: "풀강",
+                    하모니큐브: "렐릭 베어 큐브/렐릭 어썰트 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "엑시아": {
+                    스킬트리: "1-1-1/1-7-4/1-10-7",
+                    오버로드장비: "공증/우코/차속",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "미란다": {
+                    스킬트리: "1-1-1/1-4-4/4-4-7",
+                    오버로드장비: "풀강",
+                    하모니큐브: "택티컬 베어 큐브/렐릭 베어 큐브",
+                    티어: "A",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "라푼젤": {
+                    스킬트리: "4-4-4",
+                    오버로드장비: "차속4/장탄2/우코4",
+                    하모니큐브: "렐릭 힐링 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "티아": {
+                    스킬트리: "4-1-1/7-4-4/10-4-4",
+                    오버로드장비: "풀강",
+                    하모니큐브: "렐릭 비고르 큐브/렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "토브": {
+                    스킬트리: "6-4-4/9-7-7/9-10-10",
+                    오버로드장비: "장탄1~4",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "사쿠라": {
+                    스킬트리: "1-1-1/4-4-4/4-4-7",
+                    오버로드장비: "장탄1",
+                    하모니큐브: "렐릭 부스트 큐브",
+                    티어: "A",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "츠바이": {
+                    스킬트리: "4-4-4/7-4-7/10-7-10",
+                    오버로드장비: "공증/우코/명중",
+                    하모니큐브: "택티컬 베어 큐브/렐릭 어설트 큐브/렐릭 퀀텀 큐브",
+                    티어: "A",
+                    공략링크: "https://blog.naver.com/gmr_archive/223541024739",
+                    이미지: ""
+                },
+                "블랑": {
+                    스킬트리: "1-1-1/1-4-10/자유-7-10",
+                    오버로드장비: "풀강",
+                    하모니큐브: "렐릭 베어 큐브/렐릭 비고르 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "크라운": {
+                    스킬트리: "4-4-4/7-4-7/10-10-10",
+                    오버로드장비: "장탄2/공증4/우코4",
+                    하모니큐브: "택티컬 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                 "마리": {
+                    스킬트리: "4-4-4/7-7-7/10-7-10",
+                    오버로드장비: "공증4/우코4/장탄",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive/223573190882",
+                    이미지: ""
+                },
+                "나가": {
+                    스킬트리: "4-4-4/7-7-7/10-10-10",
+                    오버로드장비: "공증4/우코4/장탄4",
+                    하모니큐브: "택티컬 베어 큐브/렐릭 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "노아": {
+                    스킬트리: "1-1-1/4-4-4",
+                    오버로드장비: "차속4",
+                    하모니큐브: "렐릭 부스트 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "수산나": {
+                    스킬트리: "4-4-7/4-4-10/10-10-10",
+                    오버로드장비: "풀강",
+                    하모니큐브: "택티컬 베어 큐브/렐릭 베어 큐브/택티컬 부스트",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive/223510506491",
+                    이미지: ""
+                },
+                "수헬름": {
+                    스킬트리: "1-4-1/4-7-4/4-10-4",
+                    오버로드장비: "풀강",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive/223524358666",
+                    이미지: ""
+                },
+                "레드후드": {
+                    스킬트리: "4-4-4/4-7-7/10-10-10",
+                    오버로드장비: "공증4/우코4/차뎀차속",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "흑련": {
+                    스킬트리: "4-4-4/7-4-7/10-7-10",
+                    오버로드장비: "공증4/우코4/차속/장탄",
+                    하모니큐브: "택티컬 베어 큐브/택티컬 어설트 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "앨리스": {
+                    스킬트리: "4-1-7/7-4-7/10-4-10",
+                    오버로드장비: "차속2/장탄2/공증4/우코4",
+                    하모니큐브: "택티컬 베어 큐브",
+                    티어: "SSS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                 "클루드": {
+                    스킬트리: "4-4-4/7-4-7/10-7-10",
+                    오버로드장비: "장탄2/공증4/우코4",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                 "모더니아": {
+                    스킬트리: "4-4-4/7-4-4/10-10-4",
+                    오버로드장비: "장탄3/공증4/우코4",
+                    하모니큐브: "택티컬 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "아스카": {
+                    스킬트리: "7-4-7/7-7-7/10-10-10",
+                    오버로드장비: "우코4/공증4/장탄2~3",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive/223557165787",
+                    이미지: ""
+                },
+                "수니스": {
+                    스킬트리: "4-4-1/7-7-4/10-10-9",
+                    오버로드장비: "공증4/우코4/명중2~4",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive/223524184138",
+                    이미지: ""
+                },
+                "아인": {
+                    스킬트리: "7-7-7/9-9-9/10-10-10",
+                    오버로드장비: "공증4/우코4/장탄1~2",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive/223525518735",
+                    이미지: ""
+                },
+                "에밀리아": {
+                    스킬트리: "4-4-4/4-7-7/7-10-10",
+                    오버로드장비: "차속2~4/공증4/우코4",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "레이": {
+                    스킬트리: "4-4-4/7-7-7/7-10-10",
+                    오버로드장비: "공증4/우코4/장탄2",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브/택티컬 부스트",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive/223565017669",
+                    이미지: ""
+                },
+                 "라플라스": {
+                    스킬트리: "1-1-1/4-4-7/4-10-10",
+                    오버로드장비: "공증4/우코4/차속1~4",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 어설트 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "맥스웰": {
+                    스킬트리: "4-4-4/7-4-7/10-4-10",
+                    오버로드장비: "공증4/우코4/장탄1",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 어설트 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "누아르": {
+                    스킬트리: "4-4-4/7-5-4/10-9-4",
+                    오버로드장비: "공증4/우코4",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "프리바티": {
+                    스킬트리: "7-1-1/7-4-4/10-4-4",
+                    오버로드장비: "공증/우코",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "프리바티: 언카인드 메이드": {
+                    스킬트리: "4-4-4/7-7-7/10-10-7",
+                    오버로드장비: "공증4/우코4/장탄2",
+                    하모니큐브: "렐릭 베어 큐브/택티컬 베어 큐브",
+                    티어: "A",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "스노우화이트": {
+                    스킬트리: "4-4-4/4-4-7/7-7-10",
+                    오버로드장비: "공증4/우코4/차뎀2~4/차속2~4",
+                    하모니큐브: "렐릭 베어 큐브/렐릭 부스트 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+                "수쿠라": {
+                    스킬트리: "7-4-4/7-7-7/10-10-10",
+                    오버로드장비: "강화 아머",
+                    하모니큐브: "공증4/우코4/장탄or크확/크댐",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive/223510520864",
+                    이미지: ""
+                },"소다: 트윙클링 바니": {
+                    스킬트리: "4-4-4/4-7-7/7-10-10",
+                    오버로드장비: "공증4/우코4/명중2/장탄2",
+                    하모니큐브: "택티컬 베어 큐브, 렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },"루주": {
+                    스킬트리: "4-4-4/4-7-7/7-10-10",
+                    오버로드장비: "공증4/우코4/명중2/장탄2",
+                    하모니큐브: "택티컬 베어 큐브, 렐릭 베어 큐브",
+                    티어: "S",
+                    공략링크: "https://blog.naver.com/gmr_archive/223589022759",
+                    이미지: ""
+                },
+                "퀀시: 이스케이프 퀸": {
+                    스킬트리: "1-1-1/7-9-9/10-10-10",
+                    오버로드장비: "공증4/우코4/장탕2/명중1",
+                    하모니큐브: "렐릭 베어 큐브",
+                    티어: "SS",
+                    공략링크: "https://blog.naver.com/gmr_archive",
+                    이미지: ""
+                },
+        };
+
+        // 페이지 로드 시 캐릭터 목록 채우기
+        window.onload = function() {
+            const select = document.getElementById('characterSelect');
+            for (let char in characters) {
+                let option = document.createElement('option');
+                option.value = char;
+                option.text = char;
+                select.appendChild(option);
+            }
+        }
+
+function searchCharacter() {
+            const nameInput = document.getElementById('characterName');
+            const select = document.getElementById('characterSelect');
+            const name = nameInput.value || select.value;
+            let info = "캐릭터 정보가 없습니다.";
+
+            if (characters[name]) {
+                const char = characters[name];
+                info = `
+                    <img src="${char.이미지}" alt="${name}" class="character-image">
+                    <div class="character-details">
+                        <h3>${name} 정보</h3>
+                        <p>스킬트리: ${char.스킬트리}</p>
+                        <p>오버로드 장비: ${char.오버로드장비}</p>
+                        <p>추천 하모니 큐브: ${char.하모니큐브}</p>
+                        <p>티어: ${char.티어}</p>
+                        <p><a href="${char.공략링크}" target="_blank">상세 공략 보기(미포스팅 니케→블로그 메인으로 이동)</a></p>
+                `;
+            }
+
+            document.getElementById('characterInfo').innerHTML = info;
+        }
+
+        // 선택 변경 시 입력 필드 업데이트
+        document.getElementById('characterSelect').onchange = function() {
+            document.getElementById('characterName').value = this.value;
+        }
+    </script>
+</body>
+    </div>
+    <footer>
+        <p>&copy; 승리의 여신: 니케 공략 made by GMR archive</p>
+    </footer>
+    
+</html>
